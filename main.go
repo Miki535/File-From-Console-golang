@@ -11,22 +11,20 @@ func main() {
 	var enterscan string
 	var FileName string
 	var Info string
-	fmt.Println("Hello USERS!\n Tap ENTER to start!")
+	fmt.Println("Hello USERS!\n Write start to start(((")
 	fmt.Scan(&enterscan)
-	if enterscan == "Enter" {
+	if enterscan == "start" {
 		fmt.Println("Enter name of youre file:")
 		fmt.Scan(&FileName)
-		if FileName == "" {
-			fmt.Println("Enter name of file you want to scan")
-			return
-		} else {
-			fmt.Println("Your file name add successfully!")
-		}
+		fmt.Println("Your file name add successfully!")
+
 		fmt.Println("Now write INFO in youre file:")
 		fmt.Scan(&Info)
 		FILE(FileName, Info)
+		fmt.Println("To restart enter start, to exit enter exit")
+	} else if enterscan == "exit" {
+		os.Exit(0)
 	}
-
 }
 
 func FILE(FILEName string, INFO string) {
