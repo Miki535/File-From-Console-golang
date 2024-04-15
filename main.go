@@ -1,10 +1,12 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"os"
 	"os/user"
 	"path/filepath"
+	"strings"
 )
 
 func main() {
@@ -15,11 +17,12 @@ func main() {
 	fmt.Scan(&Nameforfile)
 	fmt.Println("Name add succesfuly")
 	fmt.Println("Enter infomation into youre file:")
-	fmt.Scan(&Infoinfile)
+	reader := bufio.NewReader(os.Stdin)
+	Infoinfile, _ = reader.ReadString('\n')
+	Infoinfile = strings.TrimSpace(Infoinfile)
 	fmt.Println("Information add succesfuly")
 	FILE(Nameforfile, Infoinfile)
 	fmt.Println("Thanks for using our program!!!")
-
 }
 
 func FILE(FILEName string, INFO string) {
@@ -42,6 +45,7 @@ func FILE(FILEName string, INFO string) {
 
 	_, err = file.WriteString(INFO)
 	if err != nil {
+		fmt.Println(err)
 		return
 	}
 }
