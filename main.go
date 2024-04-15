@@ -2,31 +2,28 @@ package main
 
 import (
 	"fmt"
+	"html/template"
+	"net/http"
 	"os"
 	"os/user"
 	"path/filepath"
 )
 
-func main() {
-	var enterscan string
-	var FileName string
-	var Info string
-	fmt.Println("Hello USERS!\n Tap ENTER to start!")
-	fmt.Scan(&enterscan)
-	if enterscan == "Enter" {
-		fmt.Println("Enter name of youre file:")
-		fmt.Scan(&FileName)
-		if FileName == "" {
-			fmt.Println("Enter name of file you want to scan")
-			return
-		} else {
-			fmt.Println("Your file name add successfully!")
-		}
-		fmt.Println("Now write INFO in youre file:")
-		fmt.Scan(&Info)
-		FILE(FileName, Info)
-	}
+var tpl = template.Must(template.ParseFiles("templates/index.html"))
 
+func main() {
+	http.HandleFunc("/", Osn)
+	_ = http.ListenAndServe(":8080", nil)
+}
+
+func Osn(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		filename := r.FormValue("filename")
+		info := r.FormValue("info")
+		FILE(filename, info)
+
+	}
+	tpl.Execute(w, nil)
 }
 
 func FILE(FILEName string, INFO string) {
