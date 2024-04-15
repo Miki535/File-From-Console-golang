@@ -2,28 +2,24 @@ package main
 
 import (
 	"fmt"
-	"html/template"
-	"net/http"
 	"os"
 	"os/user"
 	"path/filepath"
 )
 
-var tpl = template.Must(template.ParseFiles("templates/index.html"))
-
 func main() {
-	http.HandleFunc("/", Osn)
-	_ = http.ListenAndServe(":8080", nil)
-}
+	var Nameforfile string
+	var Infoinfile string
 
-func Osn(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "POST" {
-		filename := r.FormValue("filename")
-		info := r.FormValue("info")
-		FILE(filename, info)
+	fmt.Println("Enter name for file:")
+	fmt.Scan(&Nameforfile)
+	fmt.Println("Name add succesfuly")
+	fmt.Println("Enter infomation into youre file:")
+	fmt.Scan(&Infoinfile)
+	fmt.Println("Information add succesfuly")
+	FILE(Nameforfile, Infoinfile)
+	fmt.Println("Thanks for using our program!!!")
 
-	}
-	tpl.Execute(w, nil)
 }
 
 func FILE(FILEName string, INFO string) {
