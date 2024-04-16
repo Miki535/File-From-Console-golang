@@ -12,17 +12,27 @@ import (
 func main() {
 	var Nameforfile string
 	var Infoinfile string
-
-	fmt.Println("Enter name for file:")
-	fmt.Scan(&Nameforfile)
-	fmt.Println("Name add succesfuly")
-	fmt.Println("Enter infomation into youre file:")
-	reader := bufio.NewReader(os.Stdin)
-	Infoinfile, _ = reader.ReadString('\n')
-	Infoinfile = strings.TrimSpace(Infoinfile)
-	fmt.Println("Information add succesfuly")
-	FILE(Nameforfile, Infoinfile)
-	fmt.Println("Thanks for using our program!!!")
+	var startinput string
+	fmt.Println("Hello USERS!")
+	for {
+		fmt.Println("Enter start to start((")
+		fmt.Scan(&startinput)
+		startinput2 := strings.ToLower(startinput)
+		if startinput2 == "start" {
+			fmt.Println("Enter name for file:")
+			fmt.Scan(&Nameforfile)
+			fmt.Println("Name add succesfuly")
+			fmt.Println("Enter infomation into youre file:")
+			reader := bufio.NewReader(os.Stdin)
+			Infoinfile, _ = reader.ReadString('\n')
+			Infoinfile = strings.TrimSpace(Infoinfile)
+			fmt.Println("Information add succesfuly")
+			FILE(Nameforfile, Infoinfile)
+			fmt.Println("Thanks for using our program!!!")
+		} else {
+			os.Exit(0)
+		}
+	}
 }
 
 func FILE(FILEName string, INFO string) {
