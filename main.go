@@ -23,11 +23,13 @@ func main() {
 		if startinput2 == "start" {
 			// add file code:
 			fmt.Println("Enter name for file:")
-			fmt.Scan(&Nameforfile)
+			reader := bufio.NewReader(os.Stdin)
+			Nameforfile, _ = reader.ReadString('\n')
+			Nameforfile = strings.TrimSpace(Nameforfile)
 			fmt.Println("Name add succesfuly")
 			fmt.Println("Enter infomation into youre file:")
 			// special scan for info in our file
-			reader := bufio.NewReader(os.Stdin)
+			reader = bufio.NewReader(os.Stdin)
 			Infoinfile, _ = reader.ReadString('\n')
 			Infoinfile = strings.TrimSpace(Infoinfile)
 			fmt.Println("Information add succesfuly")
